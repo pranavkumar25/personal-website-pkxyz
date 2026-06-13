@@ -1,8 +1,8 @@
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Reveal } from "../components/Reveal";
-import { SectionHeader } from "../components/SectionHeader";
 import { WorkRow } from "../components/WorkRow";
-import { PROJECTS, CLIENTS, type Project } from "../lib/data";
+import { KineticWords, FadeUp } from "../components/Kinetic";
+import { PROJECTS, type Project } from "../lib/data";
 
 type Props = {
   openProject: (p: Project) => void;
@@ -14,87 +14,90 @@ export function WorkPage({ openProject }: Props) {
     []
   );
   const [cat, setCat] = useState("All");
+  const [view, setView] = useState<"grid" | "list">("grid");
   const filtered = cat === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === cat);
 
   return (
     <div className="animate-page-fade">
-      <section className="shell pt-[112px] sm:pt-[128px] md:pt-[152px] pb-8">
-        <Reveal className="eyebrow">Index of work · 2019 to 2026</Reveal>
-        <Reveal
-          as="h1"
-          className="ovo mt-6 sm:mt-8 leading-[0.92] tracking-tightest"
-          style={{ fontSize: "clamp(64px, 12vw, 184px)" } as React.CSSProperties}
-        >
-          Selected
-          <br />
-          <i>work.</i>
-        </Reveal>
-        <Reveal className="body-lg mt-12 sm:mt-14 max-w-[60ch]">
-          A small, opinionated set of projects. The constraint was real. The audience was real. The outcome had to land.
-        </Reveal>
-        <div className="flex flex-wrap gap-1.5 mt-8 sm:mt-10">
-          {cats.map((c) => (
-            <button
-              key={c}
-              onClick={() => setCat(c)}
-              data-cursor=""
-              className={
-                "px-4 py-2 border rounded-full text-[13px] transition-colors duration-quick " +
-                (cat === c
-                  ? "bg-midnight text-bone border-midnight"
-                  : "border-midnight/20 hover:border-midnight")
-              }
-            >
-              {c}
-            </button>
-          ))}
+      <section className="relative">
+        <div className="shell-wide pt-[128px] sm:pt-[160px] pb-[40px] sm:pb-[56px]">
+          <FadeUp>
+            <span className="kicker">Selected work · 2020 to 2026</span>
+          </FadeUp>
+          <h1 className="display-sans display-2xl mt-7 text-balance max-w-[16ch]">
+            <KineticWords text="The work" />
+            <br />
+            <span className="ovo-i text-signal">
+              <KineticWords text="behind the role." delay={140} />
+            </span>
+          </h1>
+          <FadeUp delay={180} className="mt-10 max-w-[60ch]">
+            <p className="body-lg muted">
+              A small, opinionated set. Real constraints, real audiences. Outcomes I can still defend on a Tuesday morning when nobody is watching.
+            </p>
+          </FadeUp>
         </div>
       </section>
 
-      <section className="shell pt-4 pb-[80px] sm:pb-[120px]">
-        <div className="border-t border-midnight/15">
-          {filtered.map((p) => (
-            <WorkRow key={p.id} p={p} onOpen={openProject} />
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-sand/55">
-        <div className="shell py-[80px] sm:py-[120px]">
-          <SectionHeader
-            num="Beyond the cases"
-            title={
-              <>
-                A few <i>partners.</i>
-              </>
-            }
-          />
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 border-t border-midnight/15">
-            {CLIENTS.map((c, i, arr) => {
-              const isLastInRowSm = (i + 1) % 3 === 0;
-              const isLastInRowMd = (i + 1) % 4 === 0;
-              const isLastInRowMobile = (i + 1) % 2 === 0;
-              const rowsMobile = Math.ceil(arr.length / 2);
-              const lastRowMobile = Math.floor(i / 2) === rowsMobile - 1;
-              return (
-                <Reveal
-                  key={c}
-                  delay={i * 40}
-                  className={[
-                    "py-10 px-5 sm:px-7 ovo leading-none border-midnight/10",
-                    !isLastInRowMobile ? "border-r" : "",
-                    !isLastInRowSm ? "sm:border-r" : "sm:border-r-0",
-                    !isLastInRowMd ? "md:border-r" : "md:border-r-0",
-                    !lastRowMobile ? "border-b" : "",
-                  ].filter(Boolean).join(" ")}
-                  style={{ fontSize: "clamp(22px, 2.4vw, 30px)" } as React.CSSProperties}
-                >
-                  {i % 2 ? <i>{c}</i> : c}
-                </Reveal>
-              );
-            })}
+      <section className="shell-wide pb-[100px] sm:pb-[140px]">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10 sm:mb-12 pb-6 border-b border-midnight/10">
+          <div className="flex flex-wrap gap-1.5">
+            {cats.map((c) => (
+              <button
+                key={c}
+                onClick={() => setCat(c)}
+                className={"chip " + (cat === c ? "chip-active" : "")}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="meta">
+              <span className="ovo-i text-signal">{filtered.length}</span> projects
+            </span>
+            <div className="inline-flex items-center rounded-full border border-midnight/15 p-1 bg-bone">
+              <button
+                onClick={() => setView("grid")}
+                className={
+                  "px-3 py-1.5 text-[18px] rounded-full transition-colors " +
+                  (view === "grid" ? "bg-midnight text-bone" : "text-midnight/65")
+                }
+              >
+                Grid
+              </button>
+              <button
+                onClick={() => setView("list")}
+                className={
+                  "px-3 py-1.5 text-[18px] rounded-full transition-colors " +
+                  (view === "list" ? "bg-midnight text-bone" : "text-midnight/65")
+                }
+              >
+                List
+              </button>
+            </div>
           </div>
         </div>
+
+        {filtered.length > 0 ? (
+          view === "grid" ? (
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+              {filtered.map((p, i) => (
+                <Reveal key={p.id} delay={i * 50}>
+                  <WorkRow p={p} onOpen={openProject} variant="card" />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <div className="card overflow-hidden">
+              {filtered.map((p) => (
+                <WorkRow key={p.id} p={p} onOpen={openProject} variant="row" />
+              ))}
+            </div>
+          )
+        ) : (
+          <div className="py-20 text-center meta">No projects in this lane yet.</div>
+        )}
       </section>
     </div>
   );

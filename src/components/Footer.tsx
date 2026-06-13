@@ -1,6 +1,7 @@
 import { Reveal } from "./Reveal";
 import { ArrowOutgoing } from "./icons/Arrow";
-import type { Route } from "../lib/data";
+import { Mark } from "./Mark";
+import { CONTACT, type Route } from "../lib/data";
 
 type FooterProps = {
   go: (r: Route) => void;
@@ -9,79 +10,148 @@ type FooterProps = {
 export function Footer({ go }: FooterProps) {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-midnight text-bone pt-[80px] sm:pt-[120px] pb-10 mt-[80px] sm:mt-[120px]">
-      <div className="shell">
-        <div className="text-bone/45 eyebrow">Let's build</div>
-        <Reveal
-          as="h2"
-          className="ovo leading-[0.92] tracking-tightest mt-5 sm:mt-6 text-balance"
-          style={{ fontSize: "clamp(60px, 13vw, 200px)" } as React.CSSProperties}
-        >
-          A studio of one.
-          <br />
-          <i className="text-bone/55">Work for many.</i>
-        </Reveal>
+    <footer className="section-dark on-dark relative overflow-hidden">
+      <div className="dot-bg-dark absolute inset-0 opacity-60 pointer-events-none" aria-hidden />
+      <div className="noise" aria-hidden />
+      <div className="shell-wide relative pt-[100px] sm:pt-[140px] pb-10">
+        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16 items-end">
+          <Reveal>
+            <span className="status-pill">
+              <span className="live-dot" aria-hidden />
+              {CONTACT.status}
+              <span className="opacity-50">·</span>
+              <span className="opacity-80">{CONTACT.start}</span>
+            </span>
+            <h2 className="display-sans display-lg mt-8 sm:mt-10 text-balance">
+              Hiring for product?{" "}
+              <span className="ovo-i text-signal2">Let&apos;s talk.</span>
+            </h2>
+            <p className="body-lg mt-7 max-w-[52ch] text-bone/75">
+              Best fit is a team that needs someone who can sit between strategy and execution. I read every message myself and reply within forty eight hours.
+            </p>
 
-        <button
-          data-cursor="WRITE"
-          data-signal=""
-          onClick={() => go("contact")}
-          className="inline-flex items-center gap-3.5 mt-12 sm:mt-16 px-7 py-5 rounded-full bg-signal text-bone text-[15px] font-medium hover:bg-bone hover:text-midnight transition-all duration-standard ease-editorial hover:-translate-y-0.5"
-        >
-          Start a project
-          <ArrowOutgoing size={16} />
-        </button>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <button onClick={() => go("contact")} className="btn btn-on-dark">
+                Get in touch
+                <span className="arr">
+                  <ArrowOutgoing size={14} />
+                </span>
+              </button>
+              <a href={CONTACT.resume} className="btn btn-on-dark-ghost">
+                Download resume
+              </a>
+              <a
+                href={CONTACT.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-on-dark-ghost"
+              >
+                LinkedIn
+                <span className="arr">
+                  <ArrowOutgoing size={14} />
+                </span>
+              </a>
+            </div>
+          </Reveal>
 
-        <div className="mt-[80px] sm:mt-[120px] pt-12 border-t border-bone/15 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          <div className="col-span-2 md:col-span-1">
-            <h5 className="text-[11px] tracking-widest uppercase font-medium text-bone/45 mb-4">
-              Pranav Kumar
-            </h5>
-            <p className="text-[14px] leading-[1.55] text-bone/70 max-w-[36ch]">
-              An independent operator working across product, growth, UX, and AI native building. Selective engagements. Direct outcomes.
+          <Reveal className="card-dark p-7 sm:p-9">
+            <div className="meta">Direct lines</div>
+            <ul className="mt-6 space-y-4">
+              <FooterRow k="Email" v={CONTACT.email} href={`mailto:${CONTACT.email}`} />
+              <FooterRow
+                k="Calendar"
+                v="cal.com / pranavkumar.co"
+                href={CONTACT.calendar}
+                external
+              />
+              <FooterRow k="Location" v={CONTACT.location} />
+              <FooterRow k="Response" v="Within 48 hours" />
+            </ul>
+          </Reveal>
+        </div>
+
+        <div className="hr mt-[80px] sm:mt-[110px]" />
+
+        <div className="grid grid-cols-2 sm:grid-cols-12 gap-y-10 gap-x-6 pt-10 sm:pt-12">
+          <div className="col-span-2 sm:col-span-5 flex flex-col gap-4">
+            <Mark size={32} variant="lockup-bone" />
+            <p className="text-[18px] leading-[1.6] text-bone/65 max-w-[36ch]">
+              Product manager, designer, and operator. Five years building and shipping software across product, growth, and operations.
             </p>
           </div>
-          <div>
-            <h5 className="text-[11px] tracking-widest uppercase font-medium text-bone/45 mb-4">
-              Sitemap
-            </h5>
-            <ul className="space-y-1.5 text-[14px]">
-              <FooterLink onClick={() => go("home")} label="Index" />
+
+          <div className="sm:col-span-2">
+            <h5 className="meta mb-4">Sitemap</h5>
+            <ul className="space-y-2 text-[18px]">
+              <FooterLink onClick={() => go("home")} label="Home" />
               <FooterLink onClick={() => go("work")} label="Work" />
               <FooterLink onClick={() => go("about")} label="About" />
               <FooterLink onClick={() => go("writing")} label="Writing" />
               <FooterLink onClick={() => go("contact")} label="Contact" />
             </ul>
           </div>
-          <div>
-            <h5 className="text-[11px] tracking-widest uppercase font-medium text-bone/45 mb-4">
-              Elsewhere
-            </h5>
-            <ul className="space-y-1.5 text-[14px]">
-              <FooterLink href="https://linkedin.com" label="LinkedIn" external />
-              <FooterLink href="https://read.cv" label="Read.cv" external />
-              <FooterLink href="https://substack.com" label="Substack" external />
-              <FooterLink href="https://are.na" label="Are.na" external />
+          <div className="sm:col-span-2">
+            <h5 className="meta mb-4">Elsewhere</h5>
+            <ul className="space-y-2 text-[18px]">
+              <FooterLink href={CONTACT.linkedin} label="LinkedIn" external />
+              <FooterLink href="https://x.com/itspranav_com" label="X" external />
+              <FooterLink
+                href="https://www.instagram.com/pranavkumar.co"
+                label="Instagram"
+                external
+              />
+              <FooterLink href="https://github.com/pranavkumar25" label="GitHub" external />
             </ul>
           </div>
-          <div>
-            <h5 className="text-[11px] tracking-widest uppercase font-medium text-bone/45 mb-4">
-              Direct
-            </h5>
-            <ul className="space-y-1.5 text-[14px]">
-              <FooterLink href="mailto:p@pranavkumar.co" label="p@pranavkumar.co" />
-              <FooterLink href="https://cal.com/pranav" label="cal.com/pranav" external />
+          <div className="col-span-2 sm:col-span-3">
+            <h5 className="meta mb-4">Direct</h5>
+            <ul className="space-y-2 text-[18px]">
+              <FooterLink href={`mailto:${CONTACT.email}`} label={CONTACT.email} />
+              <FooterLink href={CONTACT.calendar} label="Book a call" external />
+              <FooterLink href={CONTACT.resume} label="Download resume" />
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 sm:mt-16 flex flex-wrap justify-between gap-4 text-[11px] tracking-wider text-bone/40 uppercase">
-          <span>© {year} Pranav Kumar. All rights reserved.</span>
-          <span className="hidden sm:inline">Set in Ovo and LT Superior</span>
-          <span>v3.0 · Refreshed May 2026</span>
+        <div className="mt-12 pt-6 border-t border-bone/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <span className="text-[18px] text-bone/55">
+            © {year} Pranav Kumar. Built with love and AI in India.
+          </span>
+          <span className="text-[18px] text-bone/55 ovo-i">2026</span>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterRow({
+  k,
+  v,
+  href,
+  external,
+}: {
+  k: string;
+  v: string;
+  href?: string;
+  external?: boolean;
+}) {
+  return (
+    <li className="flex items-baseline justify-between gap-4">
+      <span className="meta">{k}</span>
+      {href ? (
+        <a
+          href={href}
+          target={external ? "_blank" : undefined}
+          rel={external ? "noopener noreferrer" : undefined}
+          className="text-[18px] text-bone hover:text-signal2 transition-colors duration-quick text-right"
+        >
+          {v}
+          {external && <span aria-hidden className="text-bone/40 ml-1.5">↗</span>}
+        </a>
+      ) : (
+        <span className="text-[18px] text-bone text-right">{v}</span>
+      )}
+    </li>
   );
 }
 
@@ -93,31 +163,36 @@ type FooterLinkProps = {
 };
 
 function FooterLink({ label, href, onClick, external }: FooterLinkProps) {
-  const cls = "py-1 inline-flex items-center gap-1.5 hover:text-signal transition-colors duration-quick";
+  const cls =
+    "py-1 inline-flex items-center gap-2 text-bone/75 hover:text-bone transition-colors duration-quick";
+  const inner = (
+    <>
+      <span>{label}</span>
+      {external && (
+        <span aria-hidden className="text-bone/40">
+          ↗
+        </span>
+      )}
+    </>
+  );
   if (href) {
     return (
       <li>
         <a
-          data-cursor=""
           href={href}
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
           className={cls}
         >
-          {label}
-          {external && (
-            <span aria-hidden className="text-bone/40 text-[10px]">
-              ↗
-            </span>
-          )}
+          {inner}
         </a>
       </li>
     );
   }
   return (
     <li>
-      <button data-cursor="" onClick={onClick} className={cls}>
-        {label}
+      <button onClick={onClick} className={cls}>
+        {inner}
       </button>
     </li>
   );

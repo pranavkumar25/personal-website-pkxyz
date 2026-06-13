@@ -1,29 +1,39 @@
 type MarkProps = {
   size?: number;
-  variant?: "square" | "lockup";
+  variant?: "square" | "lockup" | "lockup-bone";
   className?: string;
 };
 
+const LOCKUP_VIEWBOX = "0 0 1462 417";
+const LOCKUP_ASPECT = 1462 / 417;
+
 /**
- * Primary brand mark. Square Midnight field with the [pranav lockup.
- * Bracket in Signal blue. Word in Bone. Proportions are fixed (per guidelines).
+ * Primary brand mark — drawn from the supplied logo SVG.
+ *  - "square"      → Midnight field with the lockup. Default. Use on Bone.
+ *  - "lockup"      → Bare lockup, midnight word. Use on Bone surfaces.
+ *  - "lockup-bone" → Bare lockup, bone word. Use on Midnight surfaces.
+ *
+ * The leading bracket stays Signal across every variant; the word "pranav"
+ * flips between Midnight and Bone to match the surface.
  */
 export function Mark({ size = 40, variant = "square", className = "" }: MarkProps) {
-  if (variant === "lockup") {
+  if (variant === "lockup" || variant === "lockup-bone") {
+    const wordFill = variant === "lockup-bone" ? "#FDFDF8" : "#000023";
     return (
       <svg
-        viewBox="0 0 220 56"
-        width={size * 3.92}
+        viewBox={LOCKUP_VIEWBOX}
+        width={size * LOCKUP_ASPECT}
         height={size}
         role="img"
         aria-label="pranav"
         className={className}
-        fill="none"
       >
-        <BracketAndWord />
+        <Lockup wordFill={wordFill} />
       </svg>
     );
   }
+  const innerHeight = 44;
+  const innerWidth = innerHeight * LOCKUP_ASPECT;
   return (
     <svg
       viewBox="0 0 64 64"
@@ -34,35 +44,60 @@ export function Mark({ size = 40, variant = "square", className = "" }: MarkProp
       className={className}
     >
       <rect width="64" height="64" fill="#000023" />
-      <g transform="translate(8 22)">
-        <svg viewBox="0 0 220 56" width="48" height="20" preserveAspectRatio="xMinYMid meet">
-          <BracketAndWord />
-        </svg>
-      </g>
+      <svg
+        x={(64 - innerWidth) / 2}
+        y={(64 - innerHeight) / 2}
+        width={innerWidth}
+        height={innerHeight}
+        viewBox={LOCKUP_VIEWBOX}
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <Lockup wordFill="#FDFDF8" />
+      </svg>
     </svg>
   );
 }
 
-function BracketAndWord() {
+function Lockup({ wordFill }: { wordFill: string }) {
   return (
-    <g>
-      {/* bracket [   Signal */}
-      <path
-        d="M2 4 H16 V10 H8 V46 H16 V52 H2 Z"
-        fill="#367AFF"
-      />
-      {/* word "pranav"   set in LT Superior so it inherits the loaded font on the page */}
-      <text
-        x="22"
-        y="40"
-        fontFamily="'LT Superior', system-ui, sans-serif"
-        fontWeight={500}
-        fontSize="34"
-        letterSpacing="-0.5"
-        fill="#FDFDF8"
-      >
-        pranav
-      </text>
+    <g transform="translate(-657.966111 -1180.555556)">
+      <g transform="matrix(5.555556 0 0 5.555556 0 0)">
+        <path
+          transform="translate(118.4339 285.049)"
+          d="M0,-70.098C0,-71.554 0.996,-72.549 2.451,-72.549L12.947,-72.549C14.402,-72.549 15.398,-71.554 15.398,-70.098L15.398,-69.485C15.398,-68.029 14.402,-67.034 12.947,-67.034L6.205,-67.034L6.205,-3.065L12.947,-3.065C14.402,-3.065 15.398,-2.07 15.398,-0.614L15.398,-0.001C15.398,1.455 14.402,2.451 12.947,2.451L2.451,2.451C0.996,2.451 0,1.455 0,-0.001L0,-70.098Z"
+          fill="#367AFF"
+        />
+        <path
+          transform="translate(160.1839 241.8031)"
+          d="M0,16.394C7.661,16.394 13.789,10.342 13.789,1.303C13.789,-7.661 7.661,-13.789 0,-13.789C-7.661,-13.789 -13.636,-7.508 -13.636,1.303C-13.636,10.189 -7.661,16.394 0,16.394M-17.467,35.776C-18.922,35.776 -19.918,34.781 -19.918,33.325L-19.918,-15.781C-19.918,-17.237 -18.922,-18.233 -17.467,-18.233L-15.782,-18.233C-14.326,-18.233 -13.483,-17.314 -13.483,-15.858L-13.483,-12.411C-9.73,-17.16 -4.903,-19.382 1.149,-19.382C11.644,-19.382 20.531,-10.801 20.531,1.303C20.531,13.484 11.721,21.987 1.149,21.987C-4.903,21.987 -9.883,19.689 -13.253,15.245L-13.253,33.325C-13.253,34.781 -14.249,35.776 -15.705,35.776L-17.467,35.776Z"
+          fill={wordFill}
+        />
+        <path
+          transform="translate(188.4478 222.8038)"
+          d="M0,39.837C-1.456,39.837 -2.451,38.841 -2.451,37.385L-2.451,3.218C-2.451,1.762 -1.456,0.766 0,0.766L1.532,0.766C2.911,0.766 3.983,1.762 3.983,3.141L3.983,9.193L4.29,9.193C7.201,3.371 13.866,0 19.841,0C21.144,0 21.987,0.92 21.987,2.299L21.987,3.831C21.987,5.287 20.991,6.282 19.535,6.436C11.185,7.202 4.214,12.411 4.214,24.592L4.214,37.385C4.214,38.841 3.218,39.837 1.762,39.837L0,39.837Z"
+          fill={wordFill}
+        />
+        <path
+          transform="translate(233.1854 228.0141)"
+          d="M0,30.183C7.66,30.183 13.636,23.901 13.636,15.092C13.636,6.205 7.66,0 0,0C-7.661,0 -13.79,6.128 -13.79,15.092C-13.79,24.055 -7.661,30.183 0,30.183M15.934,34.627C14.479,34.627 13.483,33.707 13.483,32.252L13.483,28.652C9.653,33.478 4.903,35.776 -1.149,35.776C-11.645,35.776 -20.531,27.196 -20.531,15.092C-20.531,2.911 -11.721,-5.593 -1.149,-5.593C4.903,-5.593 10.036,-3.141 13.253,1.302L13.253,-1.992C13.253,-3.448 14.249,-4.444 15.705,-4.444L17.466,-4.444C18.922,-4.444 19.918,-3.448 19.918,-1.992L19.918,32.175C19.918,33.63 18.922,34.627 17.466,34.627L15.934,34.627Z"
+          fill={wordFill}
+        />
+        <path
+          transform="translate(263.1346 261.4919)"
+          d="M0,-37.922L1.532,-37.922C2.988,-37.922 3.983,-36.926 3.983,-35.47L3.983,-32.406C7.584,-37.003 12.411,-39.071 17.696,-39.071C27.502,-39.071 31.869,-33.095 31.869,-24.132L31.869,-1.303C31.869,0.153 30.873,1.149 29.418,1.149L27.656,1.149C26.2,1.149 25.204,0.153 25.204,-1.303L25.204,-23.443C25.204,-29.648 21.91,-33.401 15.935,-33.401C9.806,-33.401 4.214,-28.346 4.214,-21.681L4.214,-1.303C4.214,0.153 3.218,1.149 1.762,1.149L0,1.149C-1.456,1.149 -2.451,0.153 -2.451,-1.303L-2.451,-35.47C-2.451,-36.926 -1.456,-37.922 0,-37.922"
+          fill={wordFill}
+        />
+        <path
+          transform="translate(320.8163 228.0141)"
+          d="M0,30.183C7.661,30.183 13.637,23.901 13.637,15.092C13.637,6.205 7.661,0 0,0C-7.66,0 -13.789,6.128 -13.789,15.092C-13.789,24.055 -7.66,30.183 0,30.183M15.935,34.627C14.479,34.627 13.484,33.707 13.484,32.252L13.484,28.652C9.653,33.478 4.903,35.776 -1.149,35.776C-11.644,35.776 -20.531,27.196 -20.531,15.092C-20.531,2.911 -11.721,-5.593 -1.149,-5.593C4.903,-5.593 10.037,-3.141 13.253,1.302L13.253,-1.992C13.253,-3.448 14.25,-4.444 15.705,-4.444L17.467,-4.444C18.923,-4.444 19.918,-3.448 19.918,-1.992L19.918,32.175C19.918,33.63 18.923,34.627 17.467,34.627L15.935,34.627Z"
+          fill={wordFill}
+        />
+        <path
+          transform="translate(347.4714 262.6409)"
+          d="M0,-39.071L2.146,-39.071C3.142,-39.071 4.06,-38.458 4.444,-37.462L15.628,-6.436L16.012,-6.436L27.196,-37.462C27.58,-38.458 28.499,-39.071 29.495,-39.071L31.563,-39.071C33.709,-39.071 34.627,-37.691 33.785,-35.7L20.149,-1.533C19.766,-0.613 18.846,0 17.851,0L13.79,0C12.794,0 11.875,-0.613 11.492,-1.533L-2.221,-35.7C-3.064,-37.691 -2.144,-39.071 0,-39.071"
+          fill={wordFill}
+        />
+      </g>
     </g>
   );
 }

@@ -6,25 +6,36 @@ export default {
     extend: {
       colors: {
         midnight: "#000023",
+        midnight2: "#0A0A2E",
         bone: "#FDFDF8",
+        surface: "#F2F1E9",
         signal: "#367AFF",
+        signal2: "#5C95FF",
         ink: "#1A1A3A",
         slate: "#3A3A55",
-        sand: "#E8DFC8",
+        mute: "#6A6A82",
       },
       fontFamily: {
+        sans: ["Ronzino", "system-ui", "-apple-system", "sans-serif"],
+        display: ["Ronzino", "system-ui", "sans-serif"],
         serif: ["Ovo", "Times New Roman", "serif"],
-        sans: ["LT Superior", "Inter", "system-ui", "-apple-system", "sans-serif"],
       },
       letterSpacing: {
-        tightest: "-0.035em",
-        tighter: "-0.025em",
+        tightest: "-0.034em",
+        tighter: "-0.026em",
         tight: "-0.018em",
         snug: "-0.012em",
-        wide: "0.04em",
-        wider: "0.08em",
-        widest: "0.16em",
-        ultra: "0.2em",
+        wide: "0.02em",
+        wider: "0.04em",
+        widest: "0.08em",
+      },
+      borderRadius: {
+        sm: "8px",
+        DEFAULT: "12px",
+        md: "14px",
+        lg: "20px",
+        xl: "28px",
+        "2xl": "32px",
       },
       transitionTimingFunction: {
         editorial: "cubic-bezier(.2,.8,.2,1)",
@@ -34,33 +45,24 @@ export default {
         standard: "240ms",
         editorial: "600ms",
       },
-      spacing: {
-        "s1": "8px",
-        "s2": "16px",
-        "s3": "24px",
-        "s4": "32px",
-        "s5": "48px",
-        "s6": "64px",
-        "s7": "80px",
-        "s8": "120px",
-        "s9": "160px",
-      },
       maxWidth: {
-        shell: "1480px",
+        shell: "1320px",
+        wide: "1480px",
+        prose: "66ch",
       },
       animation: {
-        "page-fade": "pageFade 600ms cubic-bezier(.2,.8,.2,1) both",
-        "pulse-soft": "pulseSoft 2.4s ease-out infinite",
+        "page-fade": "page-fade 600ms cubic-bezier(.2,.8,.2,1) both",
+        "pulse-soft": "pulse-soft 2.4s ease-out infinite",
         "marquee": "marquee 38s linear infinite",
       },
       keyframes: {
-        pageFade: {
-          from: { opacity: "0", transform: "translateY(10px)" },
+        "page-fade": {
+          from: { opacity: "0", transform: "translateY(8px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
-        pulseSoft: {
-          "0%, 100%": { boxShadow: "0 0 0 0 rgba(54,122,255,0.4)" },
-          "50%": { boxShadow: "0 0 0 10px rgba(54,122,255,0)" },
+        "pulse-soft": {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(54,122,255,0.45)" },
+          "50%": { boxShadow: "0 0 0 8px rgba(54,122,255,0)" },
         },
         marquee: {
           from: { transform: "translateX(0)" },

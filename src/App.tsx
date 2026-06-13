@@ -1,7 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
-import { Cursor } from "./components/Cursor";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { CaseDetail } from "./components/CaseDetail";
 import { HomePage } from "./pages/Home";
@@ -50,17 +49,14 @@ export function App() {
 
   return (
     <>
-      <Cursor />
       <ScrollProgress />
       <Nav route={route} go={go} />
-      <span className="rail rail-l">Pranav Kumar · Independent · 2026 · Index v3</span>
-      <span className="rail rail-r">Set in Ovo and LT Superior. Two typefaces, used carefully.</span>
       <main key={route}>
         {route === "home" && <HomePage go={go} openProject={openProject} />}
         {route !== "home" && (
           <Suspense fallback={<PageFallback />}>
             {route === "work" && <WorkPage openProject={openProject} />}
-            {route === "about" && <AboutPage />}
+            {route === "about" && <AboutPage go={go} />}
             {route === "writing" && <WritingPage />}
             {route === "contact" && <ContactPage />}
           </Suspense>

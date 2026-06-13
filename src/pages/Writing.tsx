@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { Reveal } from "../components/Reveal";
 import { WriteRow } from "../components/WriteRow";
+import { KineticWords, FadeUp } from "../components/Kinetic";
+import { ArrowRight } from "../components/icons/Arrow";
 import { WRITINGS } from "../lib/data";
 
 export function WritingPage() {
@@ -11,6 +13,7 @@ export function WritingPage() {
   const [cat, setCat] = useState("All");
   const list = cat === "All" ? WRITINGS : WRITINGS.filter((w) => w.category === cat);
   const featured = WRITINGS[0];
+  const rest = list.filter((w) => w.id !== featured.id);
 
   const dateLabel = new Date(featured.date).toLocaleDateString("en-US", {
     month: "long",
@@ -20,79 +23,90 @@ export function WritingPage() {
 
   return (
     <div className="animate-page-fade">
-      <section className="shell pt-[112px] sm:pt-[128px] md:pt-[152px] pb-8">
-        <Reveal className="eyebrow">Field notes · Essays</Reveal>
-        <Reveal
-          as="h1"
-          className="ovo mt-6 sm:mt-8 leading-[0.92] tracking-tightest"
-          style={{ fontSize: "clamp(64px, 12vw, 184px)" } as React.CSSProperties}
-        >
-          Field
-          <br />
-          <i>notes.</i>
-        </Reveal>
-        <Reveal className="body-lg mt-12 sm:mt-14 max-w-[58ch]">
-          Honest writing about design, product, business, and the actual mechanics of getting good work shipped.
-        </Reveal>
+      <section className="relative">
+        <div className="shell-wide pt-[128px] sm:pt-[160px] pb-[60px]">
+          <FadeUp>
+            <span className="kicker">Writing</span>
+          </FadeUp>
+          <h1 className="display-sans display-2xl mt-7 text-balance">
+            <KineticWords text="Notes from the" />
+            <br />
+            <span className="ovo-i text-signal">
+              <KineticWords text="in between." delay={140} />
+            </span>
+          </h1>
+          <FadeUp delay={180} className="mt-10 max-w-[60ch]">
+            <p className="body-lg muted">
+              Short essays on product, design, and what running a small business teaches you about both. Honest, mostly.
+            </p>
+          </FadeUp>
+        </div>
       </section>
 
-      <section className="shell pb-[64px]">
+      <section className="shell-wide pb-[60px]">
         <Reveal>
-          <div
-            className="grid md:grid-cols-[1.2fr_1fr] gap-8 md:gap-16 py-10 md:py-12 border-t border-b border-midnight/15"
-            data-cursor="READ"
-          >
+          <button className="card card-hover w-full text-left p-8 sm:p-12 grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-14 group">
             <div>
-              <div className="meta">Featured · Most read</div>
-              <h2
-                className="ovo mt-5 leading-[1.0] tracking-tighter text-balance"
-                style={{ fontSize: "clamp(32px, 4.6vw, 64px)" } as React.CSSProperties}
-              >
+              <span className="kicker">Featured · Most read</span>
+              <h2 className="display-sans display-lg mt-6 tracking-tight text-balance group-hover:text-signal transition-colors duration-quick">
                 {featured.title}
               </h2>
-              <p className="text-[15px] sm:text-[17px] leading-[1.55] mt-7 max-w-[52ch] text-ink">
-                {featured.excerpt}
-              </p>
-              <div className="flex flex-wrap gap-x-6 gap-y-2 mt-8 meta">
+              <p className="body-lg mt-6 max-w-[56ch] muted">{featured.excerpt}</p>
+              <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 meta">
                 <span>{featured.category}</span>
+                <span aria-hidden>·</span>
                 <span>{dateLabel}</span>
+                <span aria-hidden>·</span>
                 <span>{featured.read} min read</span>
               </div>
-            </div>
-            <div className="bg-midnight text-bone aspect-[16/10] md:aspect-auto min-h-[260px] relative overflow-hidden">
-              <span
-                className="absolute right-6 bottom-2 font-serif italic text-bone/95 leading-[0.85] tracking-tighter"
-                style={{ fontSize: "clamp(120px, 14vw, 180px)" } as React.CSSProperties}
-              >
-                W.
+              <span className="ulink mt-8 inline-flex">
+                Read essay <ArrowRight size={14} />
               </span>
-              <span className="absolute left-6 top-6 meta text-bone/55">Fig · 04</span>
             </div>
-          </div>
+            <div className="relative bg-midnight on-dark rounded-lg overflow-hidden aspect-[16/10] md:aspect-auto md:min-h-[320px]">
+              <div className="dot-bg-dark absolute inset-0 opacity-60" aria-hidden />
+              <div className="noise" aria-hidden />
+              <span
+                className="absolute right-6 bottom-2 ovo-i text-bone leading-[0.85] tracking-tighter"
+                style={{ fontSize: "clamp(140px, 22vw, 260px)" }}
+                aria-hidden
+              >
+                W
+              </span>
+              <span className="absolute left-5 top-5 status-pill">
+                <span className="dot-signal" aria-hidden />
+                Essay
+              </span>
+              <span className="absolute right-5 top-5 meta text-bone/55">
+                {featured.read} min
+              </span>
+            </div>
+          </button>
         </Reveal>
       </section>
 
-      <section className="shell pb-[80px] sm:pb-[120px]">
-        <div className="flex flex-wrap gap-1.5 mb-2">
-          {cats.map((c) => (
-            <button
-              key={c}
-              onClick={() => setCat(c)}
-              data-cursor=""
-              className={
-                "px-4 py-2 border rounded-full text-[13px] transition-colors duration-quick " +
-                (cat === c
-                  ? "bg-midnight text-bone border-midnight"
-                  : "border-midnight/20 hover:border-midnight")
-              }
-            >
-              {c}
-            </button>
-          ))}
+      <section className="shell-wide pb-[100px] sm:pb-[140px]">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-10 pb-6 border-b border-midnight/10">
+          <span className="meta">
+            All essays · <span className="ovo-i text-signal">{list.length}</span>
+          </span>
+          <div className="flex flex-wrap gap-1.5">
+            {cats.map((c) => (
+              <button
+                key={c}
+                onClick={() => setCat(c)}
+                className={"chip " + (cat === c ? "chip-active" : "")}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="border-t border-midnight/15 mt-6">
-          {list.map((w) => (
-            <WriteRow key={w.id} w={w} />
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+          {rest.map((w, i) => (
+            <Reveal key={w.id} delay={i * 50}>
+              <WriteRow w={w} variant="card" />
+            </Reveal>
           ))}
         </div>
       </section>

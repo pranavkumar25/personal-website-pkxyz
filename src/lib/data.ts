@@ -1,42 +1,24 @@
 export type Route = "home" | "work" | "about" | "writing" | "contact";
 
-/**
- * The site reads as a single document. CHAPTERS is the contents.
- * Each id maps to an in-page anchor (e.g. #ch-position).
- */
-export const CHAPTERS = [
-  { id: "cover", num: "00", name: "Cover", route: "home" as const },
-  { id: "position", num: "01", name: "Position", route: "home" as const },
-  { id: "index", num: "02", name: "Index", route: "home" as const },
-  { id: "work", num: "03", name: "Work", route: "work" as const },
-  { id: "practice", num: "04", name: "Practice", route: "home" as const },
-  { id: "principles", num: "05", name: "Principles", route: "home" as const },
-  { id: "origin", num: "06", name: "Origin", route: "about" as const },
-  { id: "notes", num: "07", name: "Notes", route: "writing" as const },
-  { id: "contact", num: "08", name: "Contact", route: "contact" as const },
-  { id: "signoff", num: "09", name: "Sign off", route: "home" as const },
-] as const;
-
-export type ChapterId = (typeof CHAPTERS)[number]["id"];
-
-export const TOTAL_PAGES = CHAPTERS.length;
-
 export type Project = {
   id: string;
   num: string;
   client: string;
   title: string;
+  summary: string;
   role: string;
-  category: string;
+  category: "Product" | "Growth" | "Design" | "Build";
   year: string;
-  excerpt: string;
+  duration: string;
+  team: string;
   challenge: string;
   approach: string;
   outcome: string;
   metrics: { label: string; value: string }[];
   tags: string[];
-  featured?: boolean;
   glyph: string;
+  accent: string;
+  featured?: boolean;
 };
 
 export type Writing = {
@@ -48,23 +30,30 @@ export type Writing = {
   read: number;
 };
 
-export type Service = {
+export type Capability = {
   num: string;
   name: string;
-  italic: string;
+  intent: string;
   desc: string;
   tags: string[];
 };
 
-export type TimelineRow = {
-  year: string;
-  label: string;
-  text: string;
+export type Experience = {
+  period: string;
+  role: string;
+  org: string;
+  type: string;
+  summary: string;
+  highlights: string[];
 };
 
-export type Belief = {
-  title: string;
-  italic: string;
+export type Tool = {
+  group: string;
+  items: string[];
+};
+
+export type CurrentlyItem = {
+  label: string;
   body: string;
 };
 
@@ -73,168 +62,192 @@ export const PROJECTS: Project[] = [
     id: "cloudtailor",
     num: "01",
     client: "CloudTailor",
-    title: "Visualization Workflows",
-    role: "Lead product designer",
+    title: "Rebuilding a 3D workflow people actually finish",
+    summary:
+      "A complex 3D customization journey was losing users right before the reward. We rebuilt the system around the real critical path.",
+    role: "Lead Product Designer, partial PM",
     category: "Product",
     year: "2023",
-    excerpt:
-      "A complex 3D workflow, reframed into a system users could trust and finish without friction.",
+    duration: "5 months",
+    team: "PM, 2 engineers, design",
     challenge:
-      "The 3D path was abandoning users in the highest intent moments. Steps were technical. The reward came too late.",
+      "Drop off was concentrated in the last three steps of the 3D editor. The product had thirteen surfaces that each looked and behaved a little differently. Users gave up before they ever saw the output that the product was actually good at.",
     approach:
-      "Rebuilt the journey from the logic up. A modular system that became repeatable across thirteen surfaces.",
+      "Rebuilt the journey from the logic up. Mapped the real user task in five rounds of interviews, then designed a modular system that the team could repeat across surfaces without redrawing each screen.",
     outcome:
-      "Workflow completion lifted 40 percent. Time to first render dropped a third.",
+      "Workflow completion went up forty percent. Time to first render dropped by a third. Thirteen surfaces started feeling like one product, not thirteen.",
     metrics: [
       { label: "Workflow completion", value: "+40%" },
       { label: "Time to first render", value: "−32%" },
       { label: "Surfaces unified", value: "13" },
     ],
-    tags: ["UX research", "Design systems", "Workflow design"],
+    tags: ["Discovery", "Design systems", "Workflow", "3D editor"],
+    glyph: "CT",
+    accent: "#367AFF",
     featured: true,
-    glyph: "C",
   },
   {
     id: "plentiful",
     num: "02",
     client: "Plentiful",
-    title: "Retention-led Mobile",
+    title: "Onboarding and loops that hold the curve",
+    summary:
+      "Day seven retention was the soft spot. We rewrote onboarding around real intent and added loops anchored in observed behaviour.",
     role: "Product and growth design",
-    category: "Mobile",
+    category: "Growth",
     year: "2023",
-    excerpt:
-      "Onboarding and behavioural loops, rebuilt where the app was losing users fastest.",
+    duration: "3 months",
+    team: "Founder, 1 engineer, design",
     challenge:
-      "The first week was leaking users. Retention curves were softest where they hurt most.",
+      "Week one was leaking the users we worked hardest to acquire. The product had good moments, but the path to those moments was buried two screens too deep.",
     approach:
-      "Re-sequenced onboarding around real intent. Introduced loops anchored in observed behaviour, not aspiration.",
+      "Re-sequenced onboarding around the real first job, not the brand pitch. Built loops based on what users actually came back for, and removed two features that were quietly hurting retention.",
     outcome:
-      "Day-30 retention grew fifteen percent. Onboarding completion grew twenty seven.",
+      "Day thirty retention up fifteen percent. Onboarding completion up twenty seven. Acquisition spend started compounding instead of leaking.",
     metrics: [
       { label: "Day-30 retention", value: "+15%" },
       { label: "Onboarding completion", value: "+27%" },
+      { label: "Features removed", value: "2" },
     ],
-    tags: ["Mobile UX", "Growth design", "Prototyping"],
+    tags: ["Mobile", "Onboarding", "Retention", "Experiments"],
+    glyph: "PL",
+    accent: "#367AFF",
     featured: true,
-    glyph: "P",
+  },
+  {
+    id: "vistaprint",
+    num: "03",
+    client: "Vistaprint",
+    title: "Internal tools that take the meetings out of the work",
+    summary:
+      "Throughput was bottlenecked by handoff and review, not by the creative work. We cut the path back to its actual shape.",
+    role: "Senior Design Partner",
+    category: "Product",
+    year: "2024",
+    duration: "4 months",
+    team: "2 PMs, 4 engineers, design",
+    challenge:
+      "Cycle time on studio output had crept up quarter on quarter. The team was strong. The path between idea and production was the problem.",
+    approach:
+      "Mapped the critical path with the team. Identified three review steps that had outlived their reason and rebuilt the templating editor around what was left.",
+    outcome:
+      "Cycle time down forty one percent. Twenty two percent more templates shipped per quarter. The team got their afternoons back.",
+    metrics: [
+      { label: "Cycle time", value: "−41%" },
+      { label: "Templates / quarter", value: "+22%" },
+      { label: "Review steps cut", value: "3" },
+    ],
+    tags: ["Internal tools", "Workflow", "Editor", "Operations"],
+    glyph: "VP",
+    accent: "#367AFF",
+    featured: true,
+  },
+  {
+    id: "ausmate",
+    num: "04",
+    client: "Ausmate",
+    title: "Care coordination that respects a real family",
+    summary:
+      "Existing tools turned care into chores and reminders. We re-architected around moments, not tasks.",
+    role: "Product Designer",
+    category: "Design",
+    year: "2022",
+    duration: "4 months",
+    team: "Founder, 2 engineers",
+    challenge:
+      "Families were drowning in notifications and to dos that did not match the rhythm of caregiving. The product felt like a project manager when it needed to feel like a kitchen counter.",
+    approach:
+      "Redesigned the home screen around moments of care. Built a calmer notification model. Cut the active surface area in half without removing capability.",
+    outcome:
+      "Weekly active families up thirty eight percent. Four point seven rating in early access. Support tickets about notifications down by half.",
+    metrics: [
+      { label: "Weekly active families", value: "+38%" },
+      { label: "App store rating", value: "4.7" },
+      { label: "Notification tickets", value: "−50%" },
+    ],
+    tags: ["iOS", "Information architecture", "Notifications"],
+    glyph: "AM",
+    accent: "#367AFF",
   },
   {
     id: "ist",
-    num: "03",
+    num: "05",
     client: "IST",
-    title: "Branding and Platform",
-    role: "Brand and web designer",
-    category: "Brand",
+    title: "Brand and platform for a new podcast network",
+    summary:
+      "Identity, product, and web due at once. A small team and a tight runway. The brand had to feel like a brand on day one.",
+    role: "Brand and Web Designer",
+    category: "Design",
     year: "2021",
-    excerpt:
-      "A new podcast platform. A clear identity and a usable interface, from day one.",
-    challenge: "Launching from zero recognition. Small team. Tight runway.",
+    duration: "9 weeks",
+    team: "Founder, 1 engineer",
+    challenge:
+      "Launching from zero recognition. The team needed clarity and trust on the first visit, on every device, with no time for a second pass.",
     approach:
-      "Built the brand system. Translated it into a web experience that was consistent, calm, and accessible.",
+      "Built the brand system first. Then translated it into a web experience that was consistent, calm, and accessible by default.",
     outcome:
-      "Launched with strong qualitative feedback on clarity and accessibility. Lighthouse a11y at 98.",
+      "Launched in nine weeks with ninety eight on Lighthouse accessibility. The team kept hearing the same two words from listeners: clear, trustworthy.",
     metrics: [
       { label: "Lighthouse a11y", value: "98" },
       { label: "Time to launch", value: "9 wks" },
     ],
-    tags: ["Branding", "Accessibility", "Web experience"],
-    featured: true,
-    glyph: "I",
+    tags: ["Branding", "Web", "Accessibility"],
+    glyph: "IS",
+    accent: "#367AFF",
   },
   {
     id: "ngo",
-    num: "04",
+    num: "06",
     client: "NGO Initiative",
-    title: "COVID Relief Apps",
-    role: "Rapid prototyper",
-    category: "Rapid",
+    title: "Six relief tools shipped in four weeks",
+    summary:
+      "Early pandemic. Volunteers on the ground needed coordination tools that worked today, not next month.",
+    role: "Rapid Prototyper",
+    category: "Build",
     year: "2020",
-    excerpt: "Six web applications. Four weeks. Coordinating relief in real time.",
+    duration: "4 weeks",
+    team: "Cross functional, distributed",
     challenge:
-      "Time mattered more than polish. Teams needed tools to coordinate under pressure.",
+      "Time mattered more than polish. The need was clear, the constraints were brutal, and no one had time to plan a full release cycle.",
     approach:
-      "Scoped, prototyped, and shipped six applications in four weeks with a lean cross-functional setup.",
+      "Scoped, prototyped, and shipped six web apps in four weeks. Useful first, pretty later. Built on stacks the team already knew so we could maintain them in the field.",
     outcome:
-      "Enabled critical resource coordination during a moment of acute urgency.",
+      "Tools held up while volunteers and supplies moved through them. The polish came after the crisis did.",
     metrics: [
       { label: "Apps shipped", value: "6" },
       { label: "Timeline", value: "4 wks" },
     ],
-    tags: ["Rapid prototyping", "Crisis response", "Web apps"],
-    glyph: "N",
-  },
-  {
-    id: "ausmate",
-    num: "05",
-    client: "Ausmate",
-    title: "Care coordination iOS",
-    role: "Product designer",
-    category: "Mobile",
-    year: "2022",
-    excerpt:
-      "Helping families coordinate care without making the household feel like a project plan.",
-    challenge: "Existing tools turned everyday care into chores and tickets.",
-    approach:
-      "Re-architected the home around moments of care, not tasks. A calmer notification model.",
-    outcome:
-      "Weekly active families up 38 percent. 4.7 store rating in early access.",
-    metrics: [
-      { label: "Weekly active families", value: "+38%" },
-      { label: "Rating", value: "4.7" },
-    ],
-    tags: ["iOS", "Care", "Information architecture"],
-    glyph: "A",
-  },
-  {
-    id: "vistaprint",
-    num: "06",
-    client: "Vistaprint",
-    title: "Studio Tooling",
-    role: "Senior design partner",
-    category: "Product",
-    year: "2024",
-    excerpt:
-      "Internal tooling so the studio could ship more, with less drift between design and production.",
-    challenge:
-      "Throughput was bottlenecked by handoff and review, not creative work.",
-    approach:
-      "Mapped the real critical path. Removed three review steps. Rebuilt the templating editor around it.",
-    outcome:
-      "Cycle times dropped 41 percent. The feedback loop between design and production got quieter.",
-    metrics: [
-      { label: "Cycle time", value: "−41%" },
-      { label: "Templates / quarter", value: "+22%" },
-    ],
-    tags: ["Internal tools", "Workflow", "Editor UX"],
-    glyph: "V",
+    tags: ["No code", "Rapid prototyping", "Crisis response"],
+    glyph: "NG",
+    accent: "#367AFF",
   },
 ];
 
 export const WRITINGS: Writing[] = [
   {
     id: "closed-company",
-    title: "Why I closed my company. And what I'd do differently.",
+    title: "Why I closed my company. And what I would do differently.",
     excerpt:
-      "Two years of building Accuplish changed how I think about business, identity, and what it means to grow something responsibly.",
+      "Two years of running a studio rewired how I think about business, identity, and what it actually means to grow something responsibly.",
     category: "Business",
     date: "2024-12-04",
     read: 11,
   },
   {
     id: "data-driven",
-    title: "Data driven design doesn't mean removing your intuition.",
+    title: "Data driven design does not mean removing your intuition.",
     excerpt:
-      "The best decisions pair evidence with judgment. One does not replace the other.",
-    category: "Design and Product",
+      "The best decisions pair evidence with judgment. Neither replaces the other, and the teams that pretend otherwise pay for it later.",
+    category: "Product",
     date: "2024-11-12",
     read: 6,
   },
   {
     id: "case-studies",
-    title: "The case studies no one publishes.",
+    title: "The case studies nobody publishes.",
     excerpt:
-      "Messy projects teach more than polished wins. The industry should talk about them more honestly.",
-    category: "Lessons",
+      "Messy projects teach more than polished wins. The industry would get better, faster, if we wrote about them more honestly.",
+    category: "Craft",
     date: "2024-10-08",
     read: 7,
   },
@@ -242,7 +255,7 @@ export const WRITINGS: Writing[] = [
     id: "design-business",
     title: "What running a design business taught me about design.",
     excerpt:
-      "Once you sell, scope, ship and retain, your definition of design gets less romantic. And more useful.",
+      "Once you have to sell, scope, ship, and keep the client, your definition of design gets less romantic. And quite a bit more useful.",
     category: "Business",
     date: "2024-09-15",
     read: 5,
@@ -251,8 +264,8 @@ export const WRITINGS: Writing[] = [
     id: "generalist",
     title: "In defense of the operator generalist.",
     excerpt:
-      "Range, used carefully, is one of the most underrated forms of leverage.",
-    category: "Perspective",
+      "Range, used carefully, is one of the most underrated forms of leverage in modern product work.",
+    category: "Career",
     date: "2024-07-30",
     read: 8,
   },
@@ -260,112 +273,242 @@ export const WRITINGS: Writing[] = [
     id: "ai-native",
     title: "Designing with AI without losing the plot.",
     excerpt:
-      "Notes on building AI native workflows that compress time without flattening judgment.",
-    category: "Design and Product",
+      "Notes from building AI native workflows that compress time without flattening the judgment that made the work worth doing.",
+    category: "Product",
     date: "2024-06-18",
     read: 9,
   },
 ];
 
-export const SERVICES: Service[] = [
+export const CAPABILITIES: Capability[] = [
   {
     num: "01",
-    name: "Product",
-    italic: "Strategy.",
-    desc: "Discovery, prioritization, roadmaps. Grounded in customer behaviour and business reality.",
-    tags: ["Discovery", "Roadmaps", "PRDs", "Launch plans"],
+    name: "Product thinking",
+    intent: "Decide what to build, and why now.",
+    desc: "Discovery, prioritization, roadmaps, PRDs, launch. Frame the problem, sharpen the bet, write the spec the team can build from on Monday.",
+    tags: ["Discovery", "Roadmaps", "PRDs", "User research", "Prioritization"],
   },
   {
     num: "02",
-    name: "Growth",
-    italic: "Design.",
-    desc: "Acquisition, activation, retention. Systems that compound, not spike.",
-    tags: ["Funnels", "Experiments", "Lifecycle", "Activation"],
+    name: "Growth and analytics",
+    intent: "Make the loop keep turning.",
+    desc: "Acquisition, activation, retention. Funnels, experiments, lifecycle. Read the curves first, decide second. Build the small change that compounds.",
+    tags: ["Funnels", "Experimentation", "Retention", "Lifecycle", "GA / Mixpanel"],
   },
   {
     num: "03",
-    name: "UX and",
-    italic: "Interface.",
-    desc: "Design systems and high fidelity work. Serving the product, not decorating it.",
-    tags: ["Systems", "Flows", "Hi-fi", "Prototypes"],
+    name: "Design and craft",
+    intent: "Make the product feel inevitable.",
+    desc: "Systems thinking, end to end journeys, high fidelity execution. The work in service of the product, never the other way around.",
+    tags: ["Systems", "Journeys", "Prototypes", "Figma", "Accessibility"],
   },
   {
     num: "04",
-    name: "AI native",
-    italic: "Builds.",
-    desc: "Lean prototypes, AI assisted workflows, internal tools. Compressing time to value.",
-    tags: ["Prototypes", "Agents", "Automations", "Audits"],
+    name: "Build and ship",
+    intent: "Turn a doc into a working thing.",
+    desc: "No code, AI assisted workflows, internal tools. Shopify, Webflow, automations. The point is to compress the path from idea to in hand.",
+    tags: ["No code", "Webflow", "Shopify", "AI automation", "Internal tools"],
   },
 ];
 
-export const TIMELINE: TimelineRow[] = [
+export const EXPERIENCE: Experience[] = [
   {
-    year: "2019",
-    label: "Beginning",
-    text: "Self taught design through freelance platforms. Logos became websites. Websites became interfaces.",
+    period: "2022 — 2024",
+    role: "Founder and Lead Product Designer",
+    org: "Accuplish",
+    type: "Studio",
+    summary:
+      "Founded and ran a design and product studio. Built the operation, led the team, shipped fifty plus products across twelve industries before closing it in 2024.",
+    highlights: [
+      "Led product, design, and brand for fifty plus client engagements",
+      "Owned sales, scoping, and account growth end to end",
+      "Built a small team and the operating rhythm around it",
+      "Closed responsibly when the model stopped serving the work",
+    ],
   },
   {
-    year: "2021",
-    label: "Pivot",
-    text: "Moved from isolated visual work into complete product experiences. Led projects from exploration to launch.",
+    period: "2021 — 2022",
+    role: "Senior Product Designer",
+    org: "Various studios and startups",
+    type: "Contract",
+    summary:
+      "Moved from isolated visual work into full product experiences. First time owning something end to end, from blank page to launch.",
+    highlights: [
+      "Lead designer on three zero to one product launches",
+      "Built design systems used across web and mobile",
+      "Sat in on customer interviews, PRD writing, and roadmap calls",
+    ],
   },
   {
-    year: "2022",
-    label: "Studio",
-    text: "Founded Accuplish. Built the operation. Led the team. Delivered fifty plus projects across twelve industries.",
-  },
-  {
-    year: "2024",
-    label: "Reset",
-    text: "Closed the studio. Reset around independent consulting with a broader lens across product, growth, and AI.",
-  },
-  {
-    year: "Now",
-    label: "Operating",
-    text: "Working selectively. One engagement per quarter. Teams that want range and execution from the same person.",
-  },
-];
-
-export const BELIEFS: Belief[] = [
-  {
-    title: "Systems over",
-    italic: "artifacts.",
-    body: "Pretty screens age badly. The engine underneath is what compounds.",
-  },
-  {
-    title: "Depth with",
-    italic: "range.",
-    body: "Generalism is useful when it is earned. Each lane needs enough depth to create real leverage.",
-  },
-  {
-    title: "Honesty creates",
-    italic: "velocity.",
-    body: "The fastest teams are not the ones avoiding tension. They name what is not working early.",
-  },
-  {
-    title: "Build for the",
-    italic: "second loop.",
-    body: "First impressions are easy. The second time someone uses a thing is where craft shows up.",
+    period: "2019 — 2021",
+    role: "Designer",
+    org: "Freelance",
+    type: "Independent",
+    summary:
+      "Taught myself design on freelance platforms. Logos turned into websites. Websites turned into interfaces. The work kept asking better questions.",
+    highlights: [
+      "Two hundred plus completed engagements",
+      "Crossed from brand and visual into product and UX",
+      "Learned to scope, quote, and ship under client constraint",
+    ],
   },
 ];
 
-export const CLIENTS = [
-  "Vistaprint",
-  "CloudTailor",
-  "Ausmate",
-  "StartupNREV",
-  "Plentiful",
-  "IST",
-  "Forrest&Co",
-  "NGO Initiative",
+export const TOOLS: Tool[] = [
+  {
+    group: "Product",
+    items: ["Linear", "Notion", "Jira", "ProductPlan", "Dovetail", "Figma FigJam"],
+  },
+  {
+    group: "Design",
+    items: ["Figma", "Framer", "Principle", "Sketch", "Adobe CC", "Webflow"],
+  },
+  {
+    group: "Analytics",
+    items: ["Mixpanel", "Amplitude", "GA4", "PostHog", "Hotjar", "Looker"],
+  },
+  {
+    group: "Build",
+    items: ["Shopify", "Webflow", "Bubble", "Zapier", "Make", "Cursor", "Claude", "v0"],
+  },
+];
+
+export const INDUSTRIES = [
+  "SaaS",
+  "Healthcare",
+  "Fintech",
+  "Education",
+  "Media",
+  "E-commerce",
+  "Non profit",
+  "Real estate",
+  "Climate",
+  "Travel",
+  "Consumer",
+  "B2B platforms",
+];
+
+export const STATS = [
+  { value: "5+", label: "Years building", footnote: "Across product, design, and ops" },
+  { value: "50+", label: "Products shipped", footnote: "Solo and with teams" },
+  { value: "12", label: "Industries", footnote: "From healthcare to climate" },
+  { value: "1", label: "Company built", footnote: "And responsibly closed" },
+];
+
+export const CURRENTLY: CurrentlyItem[] = [
+  {
+    label: "Reading",
+    body: "Inspired by Matt Mochary. Notes on operating cadence and how leaders structure their week.",
+  },
+  {
+    label: "Building",
+    body: "An AI workflow that turns founder interviews into a first draft PRD in under five minutes.",
+  },
+  {
+    label: "Studying",
+    body: "Reforge Product Strategy. Slowly. Trying to apply each module to a real product the same week.",
+  },
+  {
+    label: "Listening",
+    body: "Lenny's Podcast, mostly the engineering and growth episodes. And a lot of ambient piano on the writing days.",
+  },
+];
+
+export const PRINCIPLES = [
+  {
+    num: "01",
+    title: "Outcomes over outputs",
+    lead: "Outcomes over",
+    accent: "outputs.",
+    body: "Ship what moves a real number. Volume of work is not the same as quality of decision, and headcount is not the same as throughput.",
+    practice: "I measure success by what moved, not what shipped.",
+  },
+  {
+    num: "02",
+    title: "Speed with judgment",
+    lead: "Speed with",
+    accent: "judgment.",
+    body: "Move fast where the cost of being wrong is small. Slow down where it is not. Both are part of the job.",
+    practice: "Some decisions deserve a week. Most deserve an hour.",
+  },
+  {
+    num: "03",
+    title: "Honesty creates velocity",
+    lead: "Honesty creates",
+    accent: "velocity.",
+    body: "The fastest teams name what is not working early, even when it's awkward, then they move. Avoidance is the most expensive thing.",
+    practice: "I name the elephant in the room. Twice if needed.",
+  },
+  {
+    num: "04",
+    title: "Build for the second loop",
+    lead: "Build for the",
+    accent: "second loop.",
+    body: "First impressions are easy to manufacture. The second time someone reaches for a product is where craft actually shows up.",
+    practice: "First-time users are easy. The second visit is the test.",
+  },
+];
+
+export type Recommendation = {
+  id: string;
+  name: string;
+  initials: string;
+  role: string;
+  relationship: string;
+  quote: string;
+  verifyUrl: string;
+};
+
+export const RECOMMENDATIONS: Recommendation[] = [
+  {
+    id: "srikanth",
+    name: "Srikanth N D",
+    initials: "SN",
+    role: "COO at KPMG India",
+    relationship: "Worked with Pranav as a client",
+    quote:
+      "Pranav is a rare blend of creative sharpness and execution discipline. His UI/UX thinking brought clarity and purpose to our project, always anchored in user empathy and design elegance.",
+    verifyUrl: "https://www.linkedin.com/in/pranavkumar05/details/recommendations/",
+  },
+  {
+    id: "shailendra",
+    name: "Shailendra Shyamsukha",
+    initials: "SS",
+    role: "Senior Marketer at Visa",
+    relationship: "Managed Pranav directly",
+    quote:
+      "Pranav is a skilled UI/UX designer with a great eye for detail and user experience. Creative, reliable, and easy to work with. An asset to any team.",
+    verifyUrl: "https://www.linkedin.com/in/pranavkumar05/details/recommendations/",
+  },
+  {
+    id: "amit",
+    name: "Amit Kumar",
+    initials: "AK",
+    role: "Tech at Goofy Tails",
+    relationship: "Worked with Pranav for 3 years",
+    quote:
+      "I've worked with Pranav for three years across several design projects. He truly understands what a project needs and always delivers clean, thoughtful, and professional designs. One of the few designers I trust for important projects.",
+    verifyUrl: "https://www.linkedin.com/in/pranavkumar05/details/recommendations/",
+  },
 ];
 
 export const MARQUEE = [
   "Product",
   "Growth",
+  "Strategy",
   "UX / UI",
   "AI native",
-  "Systems",
-  "Strategy",
+  "Operations",
   "Discovery",
+  "Systems",
 ];
+
+export const CONTACT = {
+  email: "p@pranavkumar.co",
+  calendar: "https://cal.com/pranavkumar.co/30min",
+  linkedin: "https://www.linkedin.com/in/pranavkumar05/",
+  resume: "/Pranav-Kumar-Resume.pdf",
+  location: "Bangalore, India · Remote",
+  status: "Open to APM and PM roles",
+  start: "Starting June 2026",
+};
