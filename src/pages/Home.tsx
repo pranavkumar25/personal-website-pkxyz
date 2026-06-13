@@ -16,6 +16,7 @@ import {
   MARQUEE,
   PRINCIPLES,
   RECOMMENDATIONS,
+  EXPERIENCE,
   type Project,
   type Route,
 } from "../lib/data";
@@ -231,6 +232,51 @@ export function HomePage({ go, openProject }: Props) {
         </div>
       </section>
 
+      {/* ─── EXPERIENCE (condensed) ─── */}
+      <section className="shell-wide pt-[100px] sm:pt-[140px] pb-[60px] sm:pb-[80px]">
+        <SectionHeader
+          kicker="Experience"
+          title={
+            <>
+              How I got <span className="ovo-i text-signal">here.</span>
+            </>
+          }
+          intro="Five years from self-taught freelancer to founding a studio. The short version of how I got here, and the range it built."
+          right={
+            <button onClick={() => go("about")} className="ulink text-[18px]">
+              More about me
+              <ArrowRight size={14} />
+            </button>
+          }
+        />
+        <div className="border-t border-midnight/10">
+          {EXPERIENCE.map((e, i) => (
+            <Reveal
+              key={e.role}
+              delay={i * 70}
+              className="border-b border-midnight/10 py-7 sm:py-9"
+            >
+              <div className="grid md:grid-cols-[200px_1fr] gap-y-3 md:gap-x-12 items-baseline">
+                <span className="ovo-i text-signal text-[22px] tabular-nums">
+                  {e.period}
+                </span>
+                <div>
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <h3 className="display-sans text-[22px] sm:text-[26px] tracking-tight">
+                      {e.role}
+                    </h3>
+                    <span className="text-[18px] muted">
+                      at <span className="ovo-i">{e.org}</span>
+                    </span>
+                  </div>
+                  <p className="body-md mt-3 muted max-w-[64ch]">{e.summary}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* ─── BACKGROUND — Stats ─── */}
       <section className="section-dark on-dark relative overflow-hidden">
         <div className="dot-bg-dark absolute inset-0 opacity-60 pointer-events-none" aria-hidden />
@@ -242,7 +288,7 @@ export function HomePage({ go, openProject }: Props) {
               <>
                 Five years.
                 <br />
-                <span className="ovo-i text-signal2">Plain arithmetic.</span>
+                <span className="ovo-i text-signal2">Just numbers.</span>
               </>
             }
             intro="A short version of the resume. Range that has been pressure tested, not just listed."

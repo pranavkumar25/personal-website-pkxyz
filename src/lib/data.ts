@@ -314,42 +314,58 @@ export const CAPABILITIES: Capability[] = [
 export const EXPERIENCE: Experience[] = [
   {
     period: "2022 — 2024",
-    role: "Founder and Lead Product Designer",
+    role: "Founder & Design Director",
     org: "Accuplish",
     type: "Studio",
     summary:
-      "Founded and ran a design and product studio. Built the operation, led the team, shipped fifty plus products across twelve industries before closing it in 2024.",
+      "Started and led a design-first product studio from zero to operational scale. I wore every hat it took to build a real business, from crafting the user experience to writing code to closing the deals myself.",
     highlights: [
-      "Led product, design, and brand for fifty plus client engagements",
-      "Owned sales, scoping, and account growth end to end",
-      "Built a small team and the operating rhythm around it",
-      "Closed responsibly when the model stopped serving the work",
+      "Built the go-to-market engine: outreach systems, ICP, and regional positioning",
+      "Designed the delivery infrastructure with CSAT, SUS, and task-completion tracking",
+      "Led UX architecture and design standards across every client project",
+      "Hired and grew the team while staying hands-on in code and AI automation",
     ],
   },
   {
     period: "2021 — 2022",
-    role: "Senior Product Designer",
-    org: "Various studios and startups",
-    type: "Contract",
+    role: "Product & Design Consultant",
+    org: "CloudTailor · early-stage startups",
+    type: "Consulting",
     summary:
-      "Moved from isolated visual work into full product experiences. First time owning something end to end, from blank page to launch.",
+      "Partnered with founders and leadership teams to take products from concept to launch. I architected a real-time 3D customization workflow at CloudTailor and wrote the PRDs, flows, and MVPs that got a string of early startups off the ground.",
     highlights: [
-      "Lead designer on three zero to one product launches",
-      "Built design systems used across web and mobile",
-      "Sat in on customer interviews, PRD writing, and roadmap calls",
+      "Designed a real-time 3D preview for fitment, sizing, and configuration",
+      "Wrote PRDs, roadmaps, and competitive analysis alongside founders",
+      "Shipped MVPs that balanced core value with speed to market",
+      "Built accessible design systems and ran usability testing",
+    ],
+  },
+  {
+    period: "2021",
+    role: "Product Design Intern",
+    org: "Plentiful · Ausmate · VistaPrint",
+    type: "Internships",
+    summary:
+      "A year of shipping real product across three countries. I designed a direct-to-consumer mobile app from scratch for Plentiful, internal retail tools for Ausmate, and internal platforms for VistaPrint, learning the craft by doing it under deadline.",
+    highlights: [
+      "Designed Plentiful's D2C app end to end, wireframes to prototype",
+      "Built Ausmate's billing dashboard and multi-store management system",
+      "Shipped internal tools and design-system work at VistaPrint",
+      "Collaborated remote across UK, US, and India time zones",
     ],
   },
   {
     period: "2019 — 2021",
-    role: "Designer",
-    org: "Freelance",
+    role: "Freelance Designer",
+    org: "DesignCrowd · Upwork · Fiverr",
     type: "Independent",
     summary:
-      "Taught myself design on freelance platforms. Logos turned into websites. Websites turned into interfaces. The work kept asking better questions.",
+      "Where it started. I taught myself design on the marketplaces and shipped more than seventy projects: logos that became brands, brands that became websites, websites that became product. This is where I learned to scope, pitch, and deliver under pressure.",
     highlights: [
-      "Two hundred plus completed engagements",
-      "Crossed from brand and visual into product and UX",
-      "Learned to scope, quote, and ship under client constraint",
+      "70+ completed projects across brand, web, and marketing",
+      "Crossed from graphics into web and product UX",
+      "Ran client communication, scoping, and proposals solo",
+      "Built the work ethic the rest of the career stands on",
     ],
   },
 ];
@@ -357,15 +373,15 @@ export const EXPERIENCE: Experience[] = [
 export const TOOLS: Tool[] = [
   {
     group: "Product",
-    items: ["Linear", "Notion", "Jira", "ProductPlan", "Dovetail", "Figma FigJam"],
+    items: ["Linear", "Notion", "Jira", "Dovetail", "Figma FigJam"],
   },
   {
     group: "Design",
-    items: ["Figma", "Framer", "Principle", "Sketch", "Adobe CC", "Webflow"],
+    items: ["Figma", "Framer", "Lovable", "Replit", "Bolt", "Claude", "Sketch", "Adobe CC", "Webflow"],
   },
   {
     group: "Analytics",
-    items: ["Mixpanel", "Amplitude", "GA4", "PostHog", "Hotjar", "Looker"],
+    items: ["Mixpanel", "Amplitude", "GA4", "Hotjar", "Looker"],
   },
   {
     group: "Build",
@@ -398,19 +414,19 @@ export const STATS = [
 export const CURRENTLY: CurrentlyItem[] = [
   {
     label: "Reading",
-    body: "Inspired by Matt Mochary. Notes on operating cadence and how leaders structure their week.",
+    body: "Good notes on operating cadence and how solid leaders structure their whole week.",
   },
   {
     label: "Building",
-    body: "An AI workflow that turns founder interviews into a first draft PRD in under five minutes.",
+    body: "An AI workflow that takes founder interviews and gives you a first-draft PRD in under five minutes flat.",
   },
   {
     label: "Studying",
-    body: "Reforge Product Strategy. Slowly. Trying to apply each module to a real product the same week.",
+    body: "PM Fellow at NextLeap right now. Also picking up SQL and Python, and constantly juggling with new AI tools.",
   },
   {
     label: "Listening",
-    body: "Lenny's Podcast, mostly the engineering and growth episodes. And a lot of ambient piano on the writing days.",
+    body: "Claude & Codex upskilling videos, mostly the engineering and growth ones. Plus doing the best I can with my wired earphones and Spotify.",
   },
 ];
 

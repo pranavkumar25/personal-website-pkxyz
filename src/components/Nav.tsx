@@ -115,15 +115,6 @@ export function Nav({ route, go }: NavProps) {
           </nav>
 
           <div className="flex items-center gap-2">
-            <span
-              className={
-                "hidden lg:inline-flex items-center gap-2.5 text-[18px] pr-2 " +
-                (dark ? "text-bone/80" : "text-midnight/75")
-              }
-            >
-              <span className="live-dot" aria-hidden />
-              Open to APM / PM roles
-            </span>
             <button
               onClick={() => navigate("contact")}
               className={
@@ -161,11 +152,7 @@ export function Nav({ route, go }: NavProps) {
       >
         <div className="absolute inset-0 bg-bone" />
         <div className="relative h-full flex flex-col pt-[88px] pb-8 shell overflow-y-auto">
-          <span className="status-pill self-start">
-            <span className="live-dot" aria-hidden />
-            Open to APM / PM roles
-          </span>
-          <nav className="flex flex-col mt-8">
+          <nav className="flex flex-col">
             {LINKS.map((l) => (
               <button
                 key={l.id}

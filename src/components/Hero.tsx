@@ -218,15 +218,8 @@ export function Hero({ go }: Props) {
 
             {/* ── Center statement ── */}
             <div className="flex flex-col items-center text-center">
-              <FadeUp delay={40} distance={16}>
-                <span className="status-pill">
-                  <span className="live-dot" aria-hidden />
-                  Open to APM / PM roles · June 2026
-                </span>
-              </FadeUp>
-
               <h1
-                className="display-sans text-balance mt-6 sm:mt-7 max-w-[16ch]"
+                className="display-sans text-balance max-w-[16ch]"
                 style={{ fontSize: "clamp(38px, 5.4vw, 64px)", lineHeight: "1.02", letterSpacing: "-0.03em" }}
               >
                 <span className="block">
@@ -235,7 +228,7 @@ export function Hero({ go }: Props) {
                 <span className="block">
                   <KineticWords text="products that" delay={300} step={60} />{" "}
                   <span className="ovo-i hero-jewel text-signal2">
-                    <KineticWords text="endure." delay={360} step={60} />
+                    <KineticWords text="last." delay={360} step={60} />
                   </span>
                 </span>
               </h1>
@@ -245,7 +238,7 @@ export function Hero({ go }: Props) {
                 style={{ fontSize: "clamp(18px, 1.4vw, 21px)", lineHeight: "1.5", letterSpacing: "-0.01em", fontWeight: 400 }}
               >
                 <KineticWords
-                  text="A senior product builder shaping AI-native tools — from the first spec to the second loop."
+                  text="I'm a product builder shaping AI-native tools. I stay with the work from the first rough spec to the second loop."
                   delay={520}
                   step={20}
                 />

@@ -16,13 +16,7 @@ export function Footer({ go }: FooterProps) {
       <div className="shell-wide relative pt-[100px] sm:pt-[140px] pb-10">
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16 items-end">
           <Reveal>
-            <span className="status-pill">
-              <span className="live-dot" aria-hidden />
-              {CONTACT.status}
-              <span className="opacity-50">·</span>
-              <span className="opacity-80">{CONTACT.start}</span>
-            </span>
-            <h2 className="display-sans display-lg mt-8 sm:mt-10 text-balance">
+            <h2 className="display-sans display-lg text-balance">
               Hiring for product?{" "}
               <span className="ovo-i text-signal2">Let&apos;s talk.</span>
             </h2>
