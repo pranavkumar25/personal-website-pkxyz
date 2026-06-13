@@ -182,8 +182,8 @@ export function Nav({ route, go }: NavProps) {
 
           <div className="mt-auto pt-8 flex flex-col gap-2.5">
             <span className="meta">Direct</span>
-            <a className="text-[18px] font-medium" href="mailto:p@pranavkumar.co">
-              p@pranavkumar.co
+            <a className="text-[18px] font-medium" href="mailto:p@pranavkumar.xyz">
+              p@pranavkumar.xyz
             </a>
             <a
               className="text-[18px] font-medium mt-1"

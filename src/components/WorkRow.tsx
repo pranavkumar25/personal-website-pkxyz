@@ -4,54 +4,9 @@ import type { Project } from "../lib/data";
 type Props = {
   p: Project;
   onOpen: (p: Project) => void;
-  variant?: "card" | "row";
 };
 
-export function WorkRow({ p, onOpen, variant = "card" }: Props) {
-  if (variant === "row") {
-    return (
-      <button
-        onClick={() => onOpen(p)}
-        className="
-          group w-full grid items-center gap-x-4 gap-y-1 sm:gap-x-6 text-left relative
-          grid-cols-[52px_1fr_32px]
-          md:grid-cols-[80px_1.4fr_1fr_140px_120px_36px]
-          py-6 sm:py-7 border-b border-midnight/10
-          transition-[background] duration-standard ease-editorial hover:bg-surface
-          rounded-md px-2 sm:px-4
-        "
-      >
-        <span className="ovo-i text-signal text-[24px] tabular-nums">{p.num}</span>
-        <div className="min-w-0">
-          <h3 className="display-sans text-[22px] sm:text-[24px] leading-[1.15] tracking-tight group-hover:text-signal transition-colors duration-quick text-balance">
-            {p.title}
-          </h3>
-          <div className="md:hidden mt-1.5 flex flex-wrap gap-x-3 text-[18px] opacity-60">
-            <span>{p.client}</span>
-            <span aria-hidden>·</span>
-            <span>{p.category}</span>
-            <span aria-hidden>·</span>
-            <span>{p.year}</span>
-          </div>
-        </div>
-        <span className="hidden md:block text-[18px]">{p.client}</span>
-        <span className="hidden md:block text-[18px] opacity-60">{p.category}</span>
-        <span className="hidden md:block text-[18px] opacity-60 text-right tabular-nums">
-          {p.year}
-        </span>
-        <span
-          className="
-            hidden md:inline-flex items-center justify-center w-9 h-9 rounded-full border border-midnight/30
-            group-hover:bg-midnight group-hover:text-bone group-hover:border-midnight
-            transition-all duration-standard self-center
-          "
-        >
-          <ArrowOutgoing size={12} />
-        </span>
-      </button>
-    );
-  }
-
+export function WorkRow({ p, onOpen }: Props) {
   return (
     <button
       onClick={() => onOpen(p)}

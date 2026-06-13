@@ -154,7 +154,7 @@ export function HomePage({ go, openProject }: Props) {
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
           {featured.map((p, i) => (
             <Reveal key={p.id} delay={i * 80}>
-              <WorkRow p={p} onOpen={openProject} variant="card" />
+              <WorkRow p={p} onOpen={openProject} />
             </Reveal>
           ))}
         </div>

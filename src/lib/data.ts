@@ -520,11 +520,11 @@ export const MARQUEE = [
 ];
 
 export const CONTACT = {
-  email: "p@pranavkumar.co",
+  email: "p@pranavkumar.xyz",
   calendar: "https://cal.com/pranavkumar.co/30min",
   linkedin: "https://www.linkedin.com/in/pranavkumar05/",
   resume: "/Pranav-Kumar-Resume.pdf",
-  location: "Bangalore, India · Remote",
+  location: "India · Remote",
   status: "Open to APM and PM roles",
   start: "Starting June 2026",
 };

@@ -75,9 +75,9 @@ export function AboutPage({ go }: Props) {
                 </span>
               </div>
               <div className="p-6 grid grid-cols-2 gap-4">
-                <Fact k="Based" v="London, UK" />
-                <Fact k="Hours" v="GMT, ±5 hrs" />
-                <Fact k="Start" v="Two weeks" />
+                <Fact k="Based" v="India" />
+                <Fact k="Hours" v="IST, ±5 hrs" />
+                <Fact k="Start" v="One week" />
                 <Fact k="Open to" v="Hybrid / Remote" />
               </div>
             </Reveal>

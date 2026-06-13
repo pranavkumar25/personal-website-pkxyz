@@ -21,7 +21,7 @@ export function Footer({ go }: FooterProps) {
               <span className="ovo-i text-signal2">Let&apos;s talk.</span>
             </h2>
             <p className="body-lg mt-7 max-w-[52ch] text-bone/75">
-              Best fit is a team that needs someone who can sit between strategy and execution. I read every message myself and reply within forty eight hours.
+              Best fit is a team that needs someone who can sit between strategy and execution. I read every message myself and reply within twenty four hours.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
@@ -59,7 +59,7 @@ export function Footer({ go }: FooterProps) {
                 external
               />
               <FooterRow k="Location" v={CONTACT.location} />
-              <FooterRow k="Response" v="Within 48 hours" />
+              <FooterRow k="Response" v="Within 24 hours" />
             </ul>
           </Reveal>
         </div>

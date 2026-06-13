@@ -53,25 +53,19 @@ export function ContactPage() {
     <div className="animate-page-fade">
       <section className="relative">
         <div className="shell-wide pt-[128px] sm:pt-[160px] pb-[60px]">
-          <FadeUp>
-            <span className="status-pill">
-              <span className="live-dot" aria-hidden />
-              {CONTACT.status}
-            </span>
-          </FadeUp>
-          <h1 className="display-sans display-2xl mt-9 text-balance max-w-[20ch]">
+          <h1 className="display-sans display-2xl text-balance max-w-[20ch]">
             <KineticWords text="Let's" />{" "}
             <span className="ovo-i text-signal">
               <KineticWords text="talk." delay={120} />
             </span>
             <br />
-            <span className="text-midnight/55">
+            <span className="text-midnight/55 [&_.kw]:pb-[0.22em]">
               <KineticWords text="Real briefs only." delay={240} />
             </span>
           </h1>
           <FadeUp delay={300} className="mt-10 max-w-[60ch]">
             <p className="body-lg muted">
-              Best fit is a team hiring for an APM or PM role. The shorter and more specific your note, the better the reply. I read every message myself.
+              Best fit is a team hiring for an APM or PM role. The shorter and more specific your note, the better the reply. I read every message myself, properly, and I don&apos;t use AI for this.
             </p>
           </FadeUp>
         </div>
@@ -167,7 +161,7 @@ export function ContactPage() {
               </div>
 
               <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-                <span className="meta">Response within 48 hours.</span>
+                <span className="meta">Response within 24 hours.</span>
                 <button
                   type="submit"
                   disabled={sending}
@@ -201,10 +195,10 @@ export function ContactPage() {
 
             <Reveal className="card-soft p-7">
               <div className="grid grid-cols-2 gap-y-5 gap-x-6">
-                <Fact k="Based" v="London, UK" />
-                <Fact k="Hours" v="GMT, ±5 hrs" />
+                <Fact k="Based" v="India" />
+                <Fact k="Hours" v="IST, ±5 hrs" />
                 <Fact k="Open to" v="Hybrid / Remote" />
-                <Fact k="Notice" v="Two weeks" />
+                <Fact k="Notice" v="One week" />
               </div>
             </Reveal>
 
@@ -214,7 +208,7 @@ export function ContactPage() {
                 <span className="meta">A small note</span>
               </div>
               <p className="body-md mt-5 text-bone/85">
-                I&apos;m most useful early, when the problem isn&apos;t fully framed yet. If your role description starts with <span className="ovo-i">we need someone who can figure this out</span>, we&apos;ll probably get along.
+                I&apos;m most useful early, when the problem isn&apos;t fully framed yet. If your role description starts with we need someone who can figure this out, we&apos;ll probably get along.
               </p>
             </Reveal>
           </aside>
@@ -227,7 +221,7 @@ export function ContactPage() {
           (sent ? "translate-y-0" : "translate-y-[200%]")
         }
       >
-        Thank you. I&apos;ll reply within 48 hours.
+        Thank you. I&apos;ll reply within 24 hours.
       </div>
     </div>
   );

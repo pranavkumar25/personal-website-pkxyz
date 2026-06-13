@@ -14,7 +14,6 @@ export function WorkPage({ openProject }: Props) {
     []
   );
   const [cat, setCat] = useState("All");
-  const [view, setView] = useState<"grid" | "list">("grid");
   const filtered = cat === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === cat);
 
   return (
@@ -52,49 +51,19 @@ export function WorkPage({ openProject }: Props) {
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-3">
-            <span className="meta">
-              <span className="ovo-i text-signal">{filtered.length}</span> projects
-            </span>
-            <div className="inline-flex items-center rounded-full border border-midnight/15 p-1 bg-bone">
-              <button
-                onClick={() => setView("grid")}
-                className={
-                  "px-3 py-1.5 text-[18px] rounded-full transition-colors " +
-                  (view === "grid" ? "bg-midnight text-bone" : "text-midnight/65")
-                }
-              >
-                Grid
-              </button>
-              <button
-                onClick={() => setView("list")}
-                className={
-                  "px-3 py-1.5 text-[18px] rounded-full transition-colors " +
-                  (view === "list" ? "bg-midnight text-bone" : "text-midnight/65")
-                }
-              >
-                List
-              </button>
-            </div>
-          </div>
+          <span className="meta">
+            <span className="ovo-i text-signal">{filtered.length}</span> projects
+          </span>
         </div>
 
         {filtered.length > 0 ? (
-          view === "grid" ? (
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
-              {filtered.map((p, i) => (
-                <Reveal key={p.id} delay={i * 50}>
-                  <WorkRow p={p} onOpen={openProject} variant="card" />
-                </Reveal>
-              ))}
-            </div>
-          ) : (
-            <div className="card overflow-hidden">
-              {filtered.map((p) => (
-                <WorkRow key={p.id} p={p} onOpen={openProject} variant="row" />
-              ))}
-            </div>
-          )
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+            {filtered.map((p, i) => (
+              <Reveal key={p.id} delay={i * 50}>
+                <WorkRow p={p} onOpen={openProject} />
+              </Reveal>
+            ))}
+          </div>
         ) : (
           <div className="py-20 text-center meta">No projects in this lane yet.</div>
         )}
