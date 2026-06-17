@@ -82,7 +82,7 @@ export function StickyDisciplines() {
                 {String(i + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
               </span>
             </div>
-            <h3 className="display-sans display-md mt-6 tracking-tight whitespace-nowrap">
+            <h3 className="display-sans display-md mt-6 tracking-tight md:whitespace-nowrap">
               {s.name}
             </h3>
             <p className="ovo-i text-signal text-[22px] sm:text-[26px] mt-4">

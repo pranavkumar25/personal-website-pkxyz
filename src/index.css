@@ -134,6 +134,10 @@
     padding: 0;
     font: inherit;
     cursor: pointer;
+    /* Kill the grey iOS tap flash on custom controls and drop the legacy
+       300ms tap delay so taps feel immediate on touch devices. */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
   a { text-decoration: none; }
   img, svg { display: block; max-width: 100%; }
@@ -514,12 +518,20 @@
 }
 
 /* ─── Kinetic word reveal ─── */
+/* The reveal mask (overflow:hidden) must be tall enough to clear the glyphs:
+   tight display line-heights (<1) plus the Ovo italic's deep overshoot/descenders
+   otherwise clip the top and bottom of the text. Padding enlarges the mask window;
+   equal negative margins cancel it, so the box footprint, baseline, and line
+   rhythm are unchanged. */
 .kw {
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
   line-height: inherit;
-  padding-bottom: 0.14em;
+  padding-top: 0.12em;
+  padding-bottom: 0.28em;
+  margin-top: -0.12em;
+  margin-bottom: -0.28em;
 }
 .kw > span {
   display: inline-block;

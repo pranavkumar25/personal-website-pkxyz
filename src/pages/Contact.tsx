@@ -59,7 +59,7 @@ export function ContactPage() {
               <KineticWords text="talk." delay={120} />
             </span>
             <br />
-            <span className="text-midnight/55 [&_.kw]:pb-[0.22em]">
+            <span className="text-midnight/55">
               <KineticWords text="Real briefs only." delay={240} />
             </span>
           </h1>

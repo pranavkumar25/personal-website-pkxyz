@@ -98,10 +98,22 @@ export default function DarkVeil({
     const canvas = ref.current as HTMLCanvasElement;
     const parent = canvas.parentElement as HTMLElement;
 
-    const renderer = new Renderer({
-      dpr: Math.min(window.devicePixelRatio, 2),
-      canvas
-    });
+    // WebGL can be unavailable: GPU blocklists, battery saver, privacy modes,
+    // older devices. OGL throws synchronously if the context fails, which —
+    // with no error boundary above the hero — would unmount the whole app to a
+    // blank page. Bail out quietly instead; the static layers behind the canvas
+    // (dot grid, accent disc, grain) keep the hero looking intact.
+    let renderer: Renderer;
+    try {
+      renderer = new Renderer({
+        dpr: Math.min(window.devicePixelRatio, 2),
+        canvas
+      });
+      if (!renderer.gl) throw new Error("no webgl context");
+    } catch {
+      canvas.style.display = "none";
+      return;
+    }
 
     const gl = renderer.gl;
     const geometry = new Triangle(gl);
@@ -134,6 +146,7 @@ export default function DarkVeil({
 
     const start = performance.now();
     let frame = 0;
+    let running = false;
 
     const loop = () => {
       program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed;
@@ -146,11 +159,35 @@ export default function DarkVeil({
       frame = requestAnimationFrame(loop);
     };
 
-    loop();
+    // Only burn GPU cycles while the hero is actually on screen and the tab is
+    // visible. This full-screen fragment shader is expensive; leaving it running
+    // behind the rest of the page needlessly drains battery on phones.
+    const start_ = () => {
+      if (running || document.hidden) return;
+      running = true;
+      loop();
+    };
+    const stop_ = () => {
+      running = false;
+      cancelAnimationFrame(frame);
+    };
+
+    const io = new IntersectionObserver(
+      ([e]) => (e.isIntersecting ? start_() : stop_()),
+      { threshold: 0 }
+    );
+    io.observe(canvas);
+    const onVis = () => (document.hidden ? stop_() : start_());
+    document.addEventListener('visibilitychange', onVis);
 
     return () => {
-      cancelAnimationFrame(frame);
+      stop_();
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVis);
       window.removeEventListener('resize', resize);
+      // Free the context explicitly — mobile GPUs cap live WebGL contexts, and
+      // the hero re-mounts every time the user navigates back home.
+      gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale]);
   return <canvas ref={ref} className="darkveil-canvas" />;

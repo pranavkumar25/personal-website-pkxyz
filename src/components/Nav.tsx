@@ -131,7 +131,7 @@ export function Nav({ route, go }: NavProps) {
             <button
               onClick={() => setOpen((v) => !v)}
               className={
-                "md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full " +
+                "md:hidden inline-flex items-center justify-center w-11 h-11 rounded-full " +
                 (dark ? "border border-bone/25" : "border border-midnight/20")
               }
               aria-expanded={open}
@@ -180,13 +180,13 @@ export function Nav({ route, go }: NavProps) {
             </button>
           </nav>
 
-          <div className="mt-auto pt-8 flex flex-col gap-2.5">
-            <span className="meta">Direct</span>
-            <a className="text-[18px] font-medium" href="mailto:p@pranavkumar.xyz">
+          <div className="mt-auto pt-8 flex flex-col gap-1">
+            <span className="meta mb-1">Direct</span>
+            <a className="text-[18px] font-medium py-1.5 w-fit" href="mailto:p@pranavkumar.xyz">
               p@pranavkumar.xyz
             </a>
             <a
-              className="text-[18px] font-medium mt-1"
+              className="text-[18px] font-medium py-1.5 w-fit"
               href="https://www.linkedin.com/in/pranavkumar05/"
               target="_blank"
               rel="noopener noreferrer"
